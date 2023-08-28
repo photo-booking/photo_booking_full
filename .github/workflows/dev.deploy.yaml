@@ -36,6 +36,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: update_submodules
     steps:
+      - name: workdir
+        run:
+          echo "WORKDIR ${{ github.workspace }}"
       - name: Check out the repo
         uses: actions/checkout@v3
       - name: Set up Docker Buildx
@@ -48,8 +51,8 @@ jobs:
       - name: Backend Build and Push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          # context: ./backend
-          # file: backend/Dockerfile
+          context: ./backend
+          file: backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/photo_market_backend_dev:latest
 
