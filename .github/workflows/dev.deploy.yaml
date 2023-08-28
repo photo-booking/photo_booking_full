@@ -4,6 +4,10 @@ on:
   repository_dispatch:
     types: [pull_request_closed_develop]
 
+defaults:
+  run:
+    working-directory: .
+
 jobs:
   update_submodules:
     runs-on: ubuntu-latest
