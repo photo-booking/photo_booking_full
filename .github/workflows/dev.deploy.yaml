@@ -1,10 +1,8 @@
 name: Build and Deploy backend and frontend
 
-# on: 
-#   repository_dispatch:
-#     types: [pull_request_closed_develop]
-on:
-  workflow_call:
+on: 
+  repository_dispatch:
+    types: [pull_request_closed_develop]
 
 jobs:
   update_submodules:
@@ -13,7 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with: 
-          repository: photo-booking/parent_repository
           token: ${{ secrets.DISPATCH_HOOK_TOKEN }}
           submodules: true
 
