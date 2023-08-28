@@ -48,8 +48,8 @@ jobs:
       - name: Backend Build and Push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: ./backend
-          file: backend/Dockerfile
+          # context: ./backend
+          # file: backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/photo_market_backend_dev:latest
 
