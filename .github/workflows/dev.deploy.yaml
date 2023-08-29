@@ -1,10 +1,9 @@
 name: Build and Deploy backend and frontend
 
-# on: 
-#   repository_dispatch:
-#     types: [pull_request_closed_develop]
-on:
-  workflow_dispatch
+on: 
+  repository_dispatch:
+    types: [pull_request_closed_develop]
+  workflow_dispatch:
 
 defaults:
   run:
@@ -15,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone submodules
+      - name: Checkout submodules
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.DISPATCH_HOOK_TOKEN }}
