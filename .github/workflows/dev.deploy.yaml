@@ -15,21 +15,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Clone submodules
-      uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.DISPATCH_HOOK_TOKEN }}
-        submodules: true
+      - name: Clone submodules
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.DISPATCH_HOOK_TOKEN }}
+          submodules: true
 
-    - name: Update submodules content
-      run: git submodule update --remote --recursive  
-    - name: Pull the content
-      run: git pull
-    - name: Update submodules index
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Update submodule
+      - name: Update submodules content
+        run: git submodule update --remote --recursive  
+      - name: Pull the content
+        run: git pull
+      - name: Update submodules index
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update submodule
 
   build_and_push_to_docker_hub:
     name: Build and Push backend and frontend Docker images to DockerHub
@@ -39,7 +38,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
         with:
-          submodules: true
+          submodules: recursive
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker
