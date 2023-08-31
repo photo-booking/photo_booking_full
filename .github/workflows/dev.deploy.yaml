@@ -23,7 +23,7 @@ jobs:
       - name: Update submodules content
         run: git submodule update --remote --recursive  
       - name: Pull the content
-        run: git pull
+        run: git pull --recurse-submodules
       - name: Update submodules index
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
