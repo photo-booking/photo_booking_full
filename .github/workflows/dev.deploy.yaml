@@ -77,7 +77,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         source: "dev.docker-compose.yml"
-        target: "photo_market_dev"
+        target: "/root/photo_market_dev"
     - name: Executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
       with:
@@ -86,7 +86,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
-          cd photo_market_dev
+          cd /root/photo_market_dev
           sudo docker image prune -f
           sudo docker compose -f dev.docker-compose.yml pull
           sudo docker compose -f dev.docker-compose.yml down
