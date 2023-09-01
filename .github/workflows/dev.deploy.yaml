@@ -84,7 +84,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        # passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd photo_market_dev
           sudo docker image prune -f
