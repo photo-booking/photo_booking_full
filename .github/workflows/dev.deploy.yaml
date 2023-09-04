@@ -1,9 +1,11 @@
 name: Build and Deploy backend and frontend
 
-on: 
-  repository_dispatch:
-    types: [pull_request_closed_develop]
-  workflow_dispatch:
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
 
 defaults:
   run:
