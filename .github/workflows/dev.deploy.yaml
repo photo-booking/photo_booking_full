@@ -109,12 +109,12 @@ jobs:
           echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
           echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} >> .env
           echo DEBUG=True >> .env
-          echo VK_APP_ID=51732243 >> .env
-          echo VK_API_SECRET=qMryiWHJPlk70JnWcu9w >> .env
-          echo GOOGLE_CLIENT_ID=1091642644631-3nfthndgf7bsge2f1rckiqpqm0ddtpst.apps.googleusercontent.com >> .env
-          echo GOOGLE_CLIENT_SECRET=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 >> .env
-          echo EMAIL_HOST_USER=photomarket.team@gmail.com >> .env
-          echo EMAIL_HOST_PASSWORD=kzztbolechwonvwg >> .env
+          echo VK_APP_ID=${{ secrets.VK_APP_ID}} >> .env
+          echo VK_API_SECRET=${{ secrets.VK_API_SECRET }} >> .env
+          echo GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} >> .env
+          echo GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} >> .env
+          echo EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }} >> .env
+          echo EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} >> .env
           sudo docker compose -f dev.docker-compose.yml up -d
           sudo docker compose -f dev.docker-compose.yml exec backend python manage.py migrate
           sudo docker compose -f dev.docker-compose.yml exec backend python manage.py collectstatic --no-input
