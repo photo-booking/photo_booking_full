@@ -32,7 +32,7 @@ jobs:
           submodules: true
 
       - name: Update submodules content
-        run: git submodule update --init --recursive --checkout -f --remote -- "${{github.event.client_payload.module}}"
+        run: git submodule update --init --recursive --checkout --remote
       #   run: git submodule update --remote --recursive  
       # - name: Pull the content
       #   run: git pull --recurse-submodules
