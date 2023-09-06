@@ -1,12 +1,5 @@
 name: Build and Deploy backend and frontend
 
-#on:
-#  pull_request:
-#    types:
-#      - opened
-#    branches:
-#      - main
-
 on:
   repository_dispatch:
     types: [pull_request_closed_develop]
@@ -64,12 +57,12 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/photo_market_backend_dev:latest
 
-      # - name: Frontend Build and Push to DockerHub
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ./frontend
-      #     push: true
-      #     tags: ${{ secrets.DOCKER_USERNAME }}/photo_market_frontend_dev:latest
+      - name: Frontend Build and Push to DockerHub
+        uses: docker/build-push-action@v4
+        with:
+          context: ./docker_front_test
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/photo_market_frontend_dev:latest
 
   deploy:
     runs-on: ubuntu-latest
