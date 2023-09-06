@@ -36,7 +36,7 @@ jobs:
       #   run: git submodule update --remote --recursive  
       # - name: Pull the content
       #   run: git pull --recurse-submodules
-      # - name: Update submodules index
+      - name: Update submodules index
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update submodule
