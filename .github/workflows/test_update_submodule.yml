@@ -30,7 +30,7 @@ jobs:
         with:
           commit_message: Update submodule
 
-  deploy:
+  README_test:
     needs: update_submodules
     runs-on: ubuntu-latest
     steps:
@@ -41,4 +41,4 @@ jobs:
           ref: ${{ github.ref }}
       - name: cat publish file
         run: |
-          cat README.md
+          cat backend/README.md
