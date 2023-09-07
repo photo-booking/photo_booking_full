@@ -41,3 +41,4 @@ jobs:
       - name: cat publish file
         run: |
           cd backend
+          ls -a
