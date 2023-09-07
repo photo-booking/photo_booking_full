@@ -27,7 +27,9 @@ jobs:
           submodules: true
       - name: Directory
         run: |
+          git branch
           pwd
+          ls -a
       - name: Update submodules content
         run: git submodule update --init --recursive --checkout --remote
       - name: Update submodules index
@@ -41,7 +43,14 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
       - name: cat publish file
         run: |
+          git branch
+          pwd
+          ls -a
           cd backend
           pwd
+          ls -a
