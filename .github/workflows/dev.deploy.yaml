@@ -21,6 +21,8 @@ jobs:
       - name: Checkout submodules
         uses: actions/checkout@v2
         with:
+          fetch-depth: 0
+          ref: main
           token: ${{ secrets.DISPATCH_HOOK_TOKEN }}
           submodules: true
 

@@ -1,0 +1,44 @@
+name: Deploy fix test
+
+on:
+  repository_dispatch:
+    types: [push_deploy_fix]
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: .
+
+jobs:
+  update_submodules:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout ${{ github.ref }}
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.DISPATCH_HOOK_TOKEN }}
+          submodules: true
+      - name: Update submodules content
+        run: git submodule update --init --recursive --checkout --remote
+      - name: Update submodules index
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update submodule
+
+  deploy:
+    needs: update-update_submodules
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+      - name: cat publish file
+        run: |
+          cat README.md
