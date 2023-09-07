@@ -25,6 +25,7 @@ jobs:
           ref: ${{ github.ref }}
           token: ${{ secrets.DISPATCH_HOOK_TOKEN }}
           submodules: true
+      - name: Directory
         run: |
           pwd
       - name: Update submodules content
