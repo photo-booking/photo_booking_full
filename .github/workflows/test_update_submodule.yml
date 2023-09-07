@@ -41,4 +41,4 @@ jobs:
           ref: ${{ github.ref }}
       - name: cat publish file
         run: |
-          cat backend/README.md
+          cat ./backend/README.md
