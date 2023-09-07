@@ -1,0 +1,16 @@
+# .idea
+.idea
+
+# media files
+backend/media/
+
+# data
+backend/data/
+
+# enviroment
+.env
+./env
+.venv
+./venv
+
+.git
