@@ -31,7 +31,7 @@ jobs:
           commit_message: Update submodule
 
   deploy:
-    needs: update-update_submodules
+    needs: update_submodules
     runs-on: ubuntu-latest
     steps:
       - name: checkout
