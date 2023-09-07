@@ -49,9 +49,5 @@ jobs:
           submodules: recursive
       - name: cat publish file
         run: |
-          git branch
-          pwd
-          ls -a
           cd backend
-          pwd
-          ls -a
+          cat README.md
