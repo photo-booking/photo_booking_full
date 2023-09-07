@@ -21,8 +21,7 @@ jobs:
       - name: Checkout submodules
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-          ref: main
+          ref: ${{ github.ref }}
           token: ${{ secrets.DISPATCH_HOOK_TOKEN }}
           submodules: true
 
