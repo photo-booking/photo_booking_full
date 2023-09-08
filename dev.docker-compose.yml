@@ -23,15 +23,15 @@ services:
     env_file:
       - ./.env
 
-#  frontend:
-#    image: geroy4ik/photo_market_frontend_dev:latest
-#    container_name: frontend
-#    restart: always
-#    command: cp -r /app/build/. /frontend_static/
-#    volumes:
-#      - static_value:/frontend_static
-#    env_file:
-#      - ./.env
+  frontend:
+    image: geroy4ik/photo_market_frontend_dev:latest
+    container_name: frontend
+    restart: always
+    command: cp -r /app/build/. /frontend_static/
+    volumes:
+      - static_value:/frontend_static
+    env_file:
+      - ./.env
 
   nginx:
     image: nginx:1.19.3
