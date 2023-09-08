@@ -1,4 +1,4 @@
-name: Build and Deploy backend and frontend
+name: Prod deploy
 
 on: 
   repository_dispatch:
