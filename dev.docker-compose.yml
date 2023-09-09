@@ -26,7 +26,6 @@ services:
   frontend:
     image: geroy4ik/photo_market_frontend_dev:latest
     container_name: frontend
-    restart: always
     command: cp -r /app/build/. /app/static/frontend_static/
     volumes:
       - static_value:/frontend_static

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 volumes:
   pg_data:
@@ -8,22 +8,33 @@ volumes:
 
 services:
   db:
-    image: postgres:13.10
+    image: postgres:13.10-alpine
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
 
   backend:
-    image: 4aiz/photo_market_backend
+    build: ./backend/
+#    image: geroy4ik/photo_market_backend_dev:latest
     env_file: .env
+    restart: always
     depends_on:
       - db
     volumes:
-      - static:/app/static
-      - media:/app/media
+      - static:/backend_static/
+      - media:/media
 
-  gateway:
-    image: 4aiz/photo_market_gateway
+  frontend:
+    build: ./frontend/
+#    image: geroy4ik/photo_market_frontend_dev:latest
+    env_file: .env
+    command: cp -r /app/build/. /frontend_static/
+    volumes:
+        - static:/frontend_static
+
+  nginx:
+    build: ./nginx/
+#    image: geroy4ik/photo_market_nginx_dev:latest
     env_file: .env
     volumes:
       - static:/staticfiles/
