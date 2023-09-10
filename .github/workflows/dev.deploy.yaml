@@ -2,7 +2,7 @@ name: Build and Deploy backend and frontend
 
 on:
   repository_dispatch:
-    types: [pull_request_closed_develop]
+    types: [pull_request_closed_main]
   workflow_dispatch:
 
 defaults:
