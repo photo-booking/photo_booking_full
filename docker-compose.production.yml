@@ -37,6 +37,7 @@ services:
     image: geroy4ik/photo_market_nginx_dev:latest
     env_file: .env
     volumes:
+      - ./nginx_test.conf:/etc/nginx/conf.d/default.conf
       - /etc/letsencrypt:/etc/letsencrypt
       - ./data/certbot/conf:/etc/nginx/ssl
       - ./data/certbot/www:/var/www/certbot
