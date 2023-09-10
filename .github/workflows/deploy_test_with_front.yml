@@ -1,4 +1,4 @@
-name: Build and Deploy backend and frontend
+name: Test Deploy on server
 
 on:
   repository_dispatch:
