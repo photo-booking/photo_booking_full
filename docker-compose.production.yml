@@ -14,8 +14,8 @@ services:
       - pg_data:/var/lib/postgresql/data
 
   backend:
-    build: ./backend/
-#    image: geroy4ik/photo_market_backend_dev:latest
+#    build: ./backend/
+    image: geroy4ik/photo_market_backend_dev:latest
     env_file: .env
     restart: always
     depends_on:
@@ -25,16 +25,16 @@ services:
       - media:/media
 
   frontend:
-    build: ./frontend/
-#    image: geroy4ik/photo_market_frontend_dev:latest
+#    build: ./frontend/
+    image: geroy4ik/photo_market_frontend_dev:latest
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
         - static:/frontend_static
 
   nginx:
-    build: ./nginx/
-#    image: geroy4ik/photo_market_nginx_dev:latest
+#    build: ./nginx/
+    image: geroy4ik/photo_market_nginx_dev:latest
     env_file: .env
     volumes:
       - static:/staticfiles/

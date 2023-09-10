@@ -87,7 +87,6 @@ jobs:
   build_nginx_and_push_to_dockerhub:
     name: Build and push gateway image to DokerHub
     runs-on: ubuntu-latest
-    needs: update_submodules
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -107,8 +106,6 @@ jobs:
           context: ./nginx
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/photo_market_nginx_dev:latest
-    ports:
-      - "8000:80"
 
   deploy:
     runs-on: ubuntu-latest
