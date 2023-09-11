@@ -3,8 +3,8 @@ name: Photo-market deploy on server
 on:
   repository_dispatch:
     types: [pull_request_closed_develop]
-  schedule:
-    - cron: '00 0,14 * * *'
+#  schedule:
+#    - cron: '00 0,14 * * *'
   workflow_dispatch:
 
 
