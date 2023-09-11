@@ -1,8 +1,13 @@
 name: Prod deploy
 
-on: 
-  repository_dispatch:
-    types: [pull_request_closed_main]
+#on:
+#  repository_dispatch:
+#    types: [pull_request_closed_main]
+
+on:
+  push:
+    branches:
+      - test123
 
 jobs:
   update_submodules:
