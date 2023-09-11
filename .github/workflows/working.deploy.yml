@@ -4,7 +4,7 @@ on:
   repository_dispatch:
     types: [pull_request_closed_develop]
   schedule:
-    cron: '36 20,14 * * *'
+    - cron: '00 0,14 * * *'
   workflow_dispatch:
 
 
