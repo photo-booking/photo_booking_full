@@ -14,8 +14,8 @@ services:
     container_name: backend
     restart: always
     volumes:
-      - static_value:/backend_static/
-      - media_value:/media/
+      - static_value:/app/static/
+      - media_value:/app/media/
     ports:
       - "8000:8000"
     depends_on:
@@ -43,8 +43,8 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - ./data/certbot/conf:/etc/nginx/ssl
       - ./data/certbot/www:/var/www/certbot
-      - static_value:/staticfiles/
-      - media_value:/media/
+      - static_value:/var/html/static/
+      - media_value:/var/html/media/
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     depends_on:
       - backend
