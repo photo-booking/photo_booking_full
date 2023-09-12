@@ -33,7 +33,7 @@ services:
       - ./.env
 
   nginx:
-    image: geroy4ik/photo_market_frontend_dev:latest
+    image: geroy4ik/photo_market_nginx_dev:latest
     container_name: nginx
     ports:
       - "80:80"
