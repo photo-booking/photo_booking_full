@@ -21,7 +21,7 @@ services:
       - db
     volumes:
       - static:/backend_static/
-      - media:/media
+      - media:/media/
 
   frontend:
     image: geroy4ik/photo_market_frontend_dev:latest

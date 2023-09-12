@@ -1,14 +1,14 @@
 name: Build and Deploy backend and frontend
 
-#on:
-#  repository_dispatch:
-#    types: [pull_request_closed_main]
-#  workflow_dispatch:
-
 on:
-  push:
-    branches:
-      - test123
+  repository_dispatch:
+    types: [pull_request_closed_develop]
+  workflow_dispatch:
+#
+#on:
+#  push:
+#    branches:
+#      - test123
 
 defaults:
   run:
@@ -139,4 +139,4 @@ jobs:
           sudo docker compose -f dev.docker-compose.yml up -d
           sudo docker compose -f dev.docker-compose.yml exec backend python manage.py migrate
           sudo docker compose -f dev.docker-compose.yml exec backend python manage.py collectstatic --no-input
-#          sudo docker compose -f dev.docker-compose.yml exec backend cp -r /app/static/. /backend_static/static/
+          sudo docker compose -f dev.docker-compose.yml exec backend cp -r /app/static/. /backend_static/static/
