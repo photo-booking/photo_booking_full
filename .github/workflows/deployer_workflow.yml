@@ -14,7 +14,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.DEPLOYER_USERNAME }}
-          key: ${{ secrets.DEPLOYER_SSH_RSA }}
+          key: ${{ secrets.DEPLOYER_SSH_ED }}
           passphrase: ${{ secrets.DEPLOYER_PASSPHRASE }}
           source: "docker-compose.production.yml"
           target: "photo_market"
