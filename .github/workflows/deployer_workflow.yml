@@ -16,5 +16,5 @@ jobs:
           username: ${{ secrets.DEPLOYER_USERNAME }}
           key: ${{ secrets.DEPLOYER_SSH_RSA }}
           passphrase: ${{ secrets.DEPLOYER_PASSPHRASE }}
-          source: "docker-compose.production.yml"
-          target: "photo_market"
+#          source: "docker-compose.production.yml"
+#          target: "photo_market"
