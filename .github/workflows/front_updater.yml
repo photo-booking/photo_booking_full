@@ -48,14 +48,14 @@ jobs:
       - name: Login to Docker
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_USERNAME2 }} 
+          password: ${{ secrets.DOCKER_PASSWORD2 }} 
       - name: Frontend Build and Push to DockerHub
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/photo_market_frontend_dev:latest
+          tags: ${{ secrets.DOCKER_USERNAME2 }}/photo_boking_frontend:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -71,8 +71,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "docker-compose.production.yml"
-          target: "/root/photo_market_dev"
+          source: "docker-compose.yml"
+          target: "/home/Leontiev93/photo_market_dev"
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
@@ -81,7 +81,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            cd /root/photo_market_dev
-            sudo docker compose -f docker-compose.production.yml pull frontend
-            sudo docker compose -f docker-compose.production.yml down frontend
-            sudo docker compose -f docker-compose.production.yml up frontend -d
+            cd /home/Leontiev93/photo_market_dev
+            sudo docker-compose pull frontend
+            sudo docker-compose down frontend
+            sudo docker-compose up frontend -d
