@@ -1,4 +1,4 @@
-name: Test deployer
+name: Test ssh
 
 on:
   workflow_dispatch:
