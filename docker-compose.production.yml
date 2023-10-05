@@ -8,12 +8,14 @@ volumes:
 
 services:
   db:
+    container_name: photo_db
     image: postgres:13.10-alpine
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
 
   backend:
+    container_name: photo_backend
     image: geroy4ik/photo_market_backend_dev:latest
     env_file: .env
     restart: always
@@ -24,6 +26,7 @@ services:
       - media:/media/
 
   frontend:
+    container_name: photo_frontend
     image: geroy4ik/photo_market_frontend_dev:latest
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
@@ -31,12 +34,27 @@ services:
         - static:/frontend_static
 
   nginx:
-    image: geroy4ik/photo_market_nginx_dev:latest
+    container_name: photo_gateway
+#    image: geroy4ik/photo_market_nginx_dev:latest
+    image: nginx:latest
     restart: always
     env_file: .env
     volumes:
+      - ./data/nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./data/certbot/www:/var/www/certbot/:ro
+      - ./data/certbot/conf/:/etc/nginx/ssl/:ro
+      - /etc/letsencrypt:/etc/letsencrypt
       - static:/staticfiles/
-      - media:/media/
+      - media:/var/html/media/
     ports:
-      - 8000:80
-#      - 80:80
+      - 80:80
+      - 443:443
+    entrypoint: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./data/certbot/www/:/var/www/certbot/:rw
+      - ./data/certbot/conf/:/etc/letsencrypt/:rw
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
