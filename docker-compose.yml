@@ -19,8 +19,8 @@ services:
     image: geroy4ik/photo_market_backend_dev:latest
     restart: always
     volumes:
-#      - static_value:/app/static/
-      - static_value:/backend_static/
+      - static_value:/app/static/
+#      - static_value:/backend_static/
       - media_value:/app/media/
     ports:
       - "8000:8000"
@@ -36,8 +36,8 @@ services:
     volumes:
       #      - ../frontend/:/app/result_build/
       - frontend:/app/build
-#      - static_value:/app/build/static/
-      - static_value:/frontend_static
+      - static_value:/app/build/static/
+#      - static_value:/frontend_static
 
   nginx:
 
@@ -52,8 +52,8 @@ services:
       - /etc/letsencrypt/:/etc/letsencrypt/
       - ../frontend_static/build/static/:/var/html/static/
       - frontend:/usr/share/nginx/html/
-#      - static_value:/var/html/static/
-      - static_value:/staticfiles/
+      - static_value:/var/html/static/
+#      - static_value:/staticfiles/
       - media_value:/var/html/media/
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     depends_on:
