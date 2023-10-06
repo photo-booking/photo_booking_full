@@ -50,7 +50,7 @@ services:
       - ./data/certbot/conf:/etc/nginx/ssl
       - ./data/certbot/www:/var/www/certbot
       - /etc/letsencrypt/:/etc/letsencrypt/
-      - ../frontend_static/build/static/:/var/html/static/
+      - /frontend_static/build/static/:/var/html/static/
       - frontend:/usr/share/nginx/html/
       - static_value:/var/html/static/
 #      - static_value:/staticfiles/
