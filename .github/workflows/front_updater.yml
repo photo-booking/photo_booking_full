@@ -48,14 +48,14 @@ jobs:
       - name: Login to Docker
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_USERNAME2 }}
+          password: ${{ secrets.DOCKER_PASSWORD2 }}
       - name: Frontend Build and Push to DockerHub
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/photo_market_frontend_dev:latest
+          tags: ${{ secrets.DOCKER_USERNAME2 }}/photo_boking_frontend:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -67,21 +67,21 @@ jobs:
       - name: Copy docker-compose.yml via ssh
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          host: ${{ secrets.HOST2 }}
+          username: ${{ secrets.USER2 }}
+          key: ${{ secrets.SSH_KEY2 }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE2 }}
           source: "docker-compose.yml"
-          target: "/root/photo_market_dev"
+          target: "/root/photo_market"
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          host: ${{ secrets.HOST2 }}
+          username: ${{ secrets.USER2 }}
+          key: ${{ secrets.SSH_KEY2 }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE2 }}
           script: |
-            cd /root/photo_market_dev
-            sudo docker compose pull frontend
-            sudo docker compose down frontend
-            sudo docker compose up frontend -d
+            cd /root/photo_market
+            sudo docker-compose pull frontend
+            sudo docker-compose down frontend
+            sudo docker-compose up frontend -d
