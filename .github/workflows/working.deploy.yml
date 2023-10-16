@@ -137,7 +137,9 @@ jobs:
           echo EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }} >> .env
           echo EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} >> .env
           sudo docker-compose up -d
+          sudo docker-compose exec -T backend apt-get update
+          sudo docker-compose exec -T backend apt-get install vim --no-input
           sudo docker-compose exec -T backend python manage.py migrate
-          sudo docker compose exec -T backend python manage.py collectstatic --no-input
+          sudo docker-compose exec -T backend python manage.py collectstatic --no-input
 #          sudo docker compose exec backend cp -r /app/static/. /backend_static/static/
 #          sudo docker cp -r photo_market_dev_nginx_1:usr/share/nginx/html/static/* var/html/static
