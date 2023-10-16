@@ -138,7 +138,7 @@ jobs:
           echo EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} >> .env
           sudo docker-compose up -d
           sudo docker-compose exec -T backend apt-get update
-          sudo docker-compose exec -T backend apt-get install vim --no-input
+          sudo docker-compose exec -T backend apt-get -y install vim --no-input
           sudo docker-compose exec -T backend python manage.py migrate
           sudo docker-compose exec -T backend python manage.py collectstatic --no-input
 #          sudo docker compose exec backend cp -r /app/static/. /backend_static/static/
