@@ -16,7 +16,7 @@ services:
       #      – ./data/cache/:/data/
 
   backend:
-    image: geroy4ik/photo_market_backend_dev:latest
+    image: leontiev93/photo_boking_backend:latest
     restart: always
     volumes:
       - static_value:/app/static/
