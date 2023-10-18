@@ -95,7 +95,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE2 }}
           script: |
             cd /root/photo_market
-            sudo docker exec -it photo_market_nginx_1 bash
+            sudo docker exec -i photo_market_nginx_1 bash
             cd var/html/static
             rm -r -f media/
             rm -r -f js/
