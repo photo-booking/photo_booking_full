@@ -96,10 +96,10 @@ jobs:
           script: |
             cd /root/photo_market
             sudo docker exec -i photo_market_nginx_1 bash
-            cd var/html/static
+            cd /var/html/static
             rm -r -f media/
             rm -r -f js/
             rm -r -f css/
             cd ~
             cd /
-            cp -r usr/share/nginx/html/static/* var/html/static
+            cp -r /usr/share/nginx/html/static/* /var/html/static
