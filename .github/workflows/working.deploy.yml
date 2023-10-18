@@ -142,6 +142,4 @@ jobs:
           sudo docker-compose exec -T backend python manage.py migrate
           sudo docker-compose exec -T backend python manage.py collectstatic --no-input
           sudo docker exec -it photo_market_nginx_1 bash
-          cp -r photo_market_nginx_1:usr/share/nginx/html/static/* var/html/static
-#          sudo docker compose exec backend cp -r /app/static/. /backend_static/static/
-#          sudo docker cp -r photo_market_dev_nginx_1:usr/share/nginx/html/static/* var/html/static
+          cp -r usr/share/nginx/html/static/* var/html/static
