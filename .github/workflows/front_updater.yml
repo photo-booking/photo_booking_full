@@ -97,7 +97,9 @@ jobs:
             cd /root/photo_market
             sudo docker exec -it photo_market_nginx_1 bash
             cd var/html/static
-            rm -r media/
-            rm -r js/
-            rm -r css/
+            rm -r -f media/
+            rm -r -f js/
+            rm -r -f css/
+            cd ~
+            cd /
             cp -r usr/share/nginx/html/static/* var/html/static
