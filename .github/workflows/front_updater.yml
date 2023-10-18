@@ -86,3 +86,9 @@ jobs:
             sudo docker-compose down
             sudo docker volume rm photo_market_frontend
             sudo docker-compose up -d
+            sudo docker exec -it photo_market_nginx_1 bash
+            cd var/html/static
+            rm -r media/
+            rm -r js/
+            rm -r css/
+            cp -r usr/share/nginx/html/static/* var/html/static
