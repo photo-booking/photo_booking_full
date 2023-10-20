@@ -115,9 +115,12 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE2 }}
         script: |
           cd /root/photo_market
-          sudo docker image prune -f
+          sudo docker-compose stop
+          sudo systemctl stop nginx
+          sudo docker-compose rm backend
+          sudo docker-compose rm frontend
+          sudo docker image prune -af
           sudo docker-compose pull
-          sudo docker-compose down
           rm .env
           touch .env
           echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
@@ -141,5 +144,4 @@ jobs:
           sudo docker-compose exec -T backend apt-get -y install vim --no-input
           sudo docker-compose exec -T backend python manage.py migrate
           sudo docker-compose exec -T backend python manage.py collectstatic --no-input
-          sudo docker exec -it photo_market_nginx_1 bash
-          cp -r usr/share/nginx/html/static/* var/html/static
+          sudo docker cp /root/frontend/build/static photo_market_nginx_1:var/html/static
