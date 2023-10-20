@@ -33,7 +33,6 @@ services:
     image: leontiev93/photo_boking_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
-      - static_value:../frontend/static
 
   nginx:
     image: nginx:1.19.3
@@ -48,7 +47,7 @@ services:
       - static_value:/var/html/static/
       - media_value:/var/html/media/
       - ../frontend/build:/usr/share/nginx/html/
-    command: "sudo docker cp -r photo_market_dev_nginx_1:usr/share/nginx/html/static/* var/html/static"
+    command: "sudo docker cp -r photo_market_nginx_1:usr/share/nginx/html/static/* var/html/static"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     depends_on:
       - backend
