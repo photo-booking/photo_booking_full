@@ -31,11 +31,8 @@ services:
 
   frontend:
     image: leontiev93/photo_boking_frontend:latest
-    command: cp -r /app/build/ ../frontend_static/
     volumes:
-      #      - ../frontend/:/app/result_build/
-      - frontend:/app/build
-      - static_value:/app/build/static/
+      - ../frontend/:/app/result_build/
 
   nginx:
     image: nginx:1.19.3
@@ -47,17 +44,15 @@ services:
       - ./data/certbot/conf:/etc/nginx/ssl
       - ./data/certbot/www:/var/www/certbot
       - /etc/letsencrypt/:/etc/letsencrypt/
-#      - ../frontend_static/build/static/*:/var/html/static/
-      - frontend:/usr/share/nginx/html/
       - static_value:/var/html/static/
       - media_value:/var/html/media/
+      - ../frontend/build:/usr/share/nginx/html/
     command: "sudo docker cp -r photo_market_dev_nginx_1:usr/share/nginx/html/static/* var/html/static"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     depends_on:
       - backend
 
 volumes:
-  frontend:
   static_value:
   media_value:
   pg_data:
