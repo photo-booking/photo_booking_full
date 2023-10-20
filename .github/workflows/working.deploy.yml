@@ -144,4 +144,7 @@ jobs:
           sudo docker-compose exec -T backend apt-get -y install vim --no-input
           sudo docker-compose exec -T backend python manage.py migrate
           sudo docker-compose exec -T backend python manage.py collectstatic --no-input
-          sudo docker cp /root/frontend/build/static/* photo_market_nginx_1:var/html/static
+          sudo docker cp /root/frontend/build/static/css photo_market_nginx_1:var/html/static
+          sudo docker cp /root/frontend/build/static/js photo_market_nginx_1:var/html/static
+          sudo docker cp /root/frontend/build/static/media photo_market_nginx_1:var/html/static
+
