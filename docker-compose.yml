@@ -33,6 +33,7 @@ services:
     image: leontiev93/photo_boking_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
+      - static_value:../frontend/static
 
   nginx:
     image: nginx:1.19.3
