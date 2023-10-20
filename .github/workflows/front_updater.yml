@@ -82,8 +82,12 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE2 }}
           script: |
             cd /root/photo_market
+            sudo rm -r /frontend
+            cd /root/photo_market
+            sudo docker-compose rm frontend
+            sudo docker image prune -af
             sudo docker-compose pull frontend
             sudo docker-compose down
             sudo docker volume rm photo_market_frontend
             sudo docker-compose up -d
-            sudo docker cp -r /root/frontend/build/static photo_market_nginx_1:var/html/static
+            sudo docker cp -r /root/frontend/build/static photo_market_nginx_1:var/html/static/*
