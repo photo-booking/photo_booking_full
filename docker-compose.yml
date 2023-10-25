@@ -1,6 +1,12 @@
 version: '3.3'
 services:
 
+  cache:
+    image: redis:7.0.4
+    restart: always
+    volumes:
+      - ./data/cache:/data
+
   db:
     image: postgres:13.10-alpine
     restart: always
@@ -8,12 +14,6 @@ services:
       - pg_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
-
-        #  cache:
-    #    image: redis:7.0.4
-      #    restart: always
-      #    volumes:
-      #      – ./data/cache/:/data/
 
   backend:
     image: leontiev93/photo_boking_backend:latest
@@ -25,7 +25,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
-        #      - cache
+      - cache
     env_file:
       - ./.env
 
