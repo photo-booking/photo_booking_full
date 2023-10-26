@@ -17,6 +17,7 @@ services:
 
   backend:
     image: leontiev93/photo_boking_backend:latest
+    command: ["./wait-for-it.sh", "db:5432", "--","uwsgi", "--ini", "/app/config/uwsgi/uwsgi.ini"]
     restart: always
     volumes:
       - static_value:/app/static/
@@ -29,13 +30,28 @@ services:
     env_file:
       - ./.env
 
+  daphne:
+    image: leontiev93/photo_boking_backend:latest
+    command: ["../wait-for-it.sh", "db:5432", "--",
+              "daphne", "-u", "/app/daphne.sock",
+              "photo_booking.asgi:application"]
+    restart: always
+    volumes:
+      - static_value:/app/static/
+      - media_value:/app/media/
+    depends_on:
+      - db
+      - cache
+    env_file:
+      - ./.env
+
   frontend:
     image: leontiev93/photo_boking_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
 
   nginx:
-    image: nginx:1.19.3
+    image: nginx:2.19.3
     ports:
       - "80:80"
       - "443:443"
