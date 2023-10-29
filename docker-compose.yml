@@ -6,8 +6,6 @@ services:
     restart: always
     volumes:
       - ./data/cache:/data
-    networks:
-      - db_network
 
   db:
     image: postgres:13.10-alpine
@@ -16,9 +14,6 @@ services:
       - pg_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
-
-    networks:
-      - db_network
 
   backend:
     image: leontiev93/photo_boking_backend:latest
@@ -33,11 +28,7 @@ services:
       - cache
     env_file:
       - ./.env
-    command: Bash Start.sh
-    netWorks:
-      - web_network
-      - db_network
-
+    command: ["./start.sh"]
   frontend:
     image: leontiev93/photo_boking_frontend:latest
     volumes:
@@ -56,19 +47,10 @@ services:
       - static_value:/var/html/static/
       - media_value:/var/html/media/
       - ../frontend/build:/usr/share/nginx/html/
-    command: "sudo docker cp -r photo_market_nginx_1:usr/share/nginx/html/static/* var/html/static"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-    networks:
-      - web_network
 
     depends_on:
       - backend
-
-networks:
-  web_network:
-    driver: bridge
-  db_network:
-    driver: bridge
 
 volumes:
   static_value:
