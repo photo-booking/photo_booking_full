@@ -28,7 +28,6 @@ services:
       - cache
     env_file:
       - ./.env
-  #command: ["./start.sh"]
   
   backend_asgi:
     image: leontiev93/photo_boking_backend:latest
@@ -41,7 +40,6 @@ services:
       - cache
     env_file:
       - ./.env
-        #command: "/app/start.sh"
     entrypoint: ["daphne", "-b", "0.0.0.0", "-p", "8002", "photo_booking.asgi:application"]
 
   frontend:
