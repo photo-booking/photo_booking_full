@@ -29,6 +29,21 @@ services:
     env_file:
       - ./.env
   #command: ["./start.sh"]
+  
+  backend_asgi:
+    image: leontiev93/photo_boking_backend:latest
+    restart: always
+    volumes:
+      - static_value:/app/static/
+      - media_value:/app/media/
+    depends_on:
+      - db
+      - cache
+    env_file:
+      - ./.env
+        #command: "/app/start.sh"
+    entrypoint: ["daphne", "-b", "0.0.0.0", "-p", "8002", "photo_booking.asgi:application"]
+
   frontend:
     image: leontiev93/photo_boking_frontend:latest
     volumes:
