@@ -28,7 +28,7 @@ services:
       - cache
     env_file:
       - ./.env
-#    command: ["./start.sh"]
+  command: ["./start.sh"]
   frontend:
     image: leontiev93/photo_boking_frontend:latest
     volumes:
