@@ -1,8 +1,6 @@
 name: Front Updater
 
 on:
-  schedule:
-    - cron: '00 0,14 * * *'
   workflow_dispatch:
 
 defaults:
